@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BYD Charger Simulator Fleet</title>
+    <link rel="stylesheet" href="/charger.css" />
+  </head>
+  <body class="settings-page">
+    <div class="kiosk">
+      <div class="bezel">
+        <div class="lcd">
+          <header class="bar">
+            <div class="brand"><span class="logo">BYD</span> Simulator fleet</div>
+            <div class="meta">
+              <span id="dbPath">SQLite</span>
+              <a class="icon-btn" href="/">Charger screen</a>
+            </div>
+          </header>
+          <div class="form fleet-layout">
+            <fieldset>
+              <legend>Create a new simulator</legend>
+              <p class="help">Each charger is stored in the database with its settings and live variables (SoC, power, OCPP status, frames).</p>
+              <label>Charge point ID
+                <input id="newId" placeholder="BYD-002" />
+              </label>
+              <label>Start mode
+                <select id="newMode">
+                  <option value="rfid">RFID</option>
+                  <option value="pnc">Plug &amp; Charge</option>
+                  <option value="app">App / RemoteStart</option>
+                </select>
+              </label>
+              <label>Start SoC %
+                <input id="newSoc" type="number" min="5" max="95" value="30" />
+              </label>
+              <label>RFID tag
+                <input id="newTag" value="BYD-RFID-001" />
+              </label>
+              <div class="form-actions">
+                <button class="btn primary" id="btnCreate" type="button">Create simulator</button>
+              </div>
+              <p class="msg" id="createMsg"></p>
+            </fieldset>
+            <fieldset>
+              <legend>Stored variables</legend>
+              <p class="help" id="varTitle">Select a charger in the list to show every stored variable.</p>
+              <pre class="log" id="varDump">—</pre>
+            </fieldset>
+            <section class="fleet-list" id="list">
+              <p class="help">Loading…</p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/hmi.js"></script>
+    <script src="/fleet.js"></script>
+  </body>
+</html>

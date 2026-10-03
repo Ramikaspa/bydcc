@@ -1,0 +1,21 @@
+{
+  "vendor": "BYD",
+  "model": "BYD-DC-120",
+  "chargePointModel": "BYD EV Charger 120kW",
+  "maxPower": 120000,
+  "maxCurrent": 250,
+  "voltageMin": 380,
+  "voltageMax": 420,
+  "connectors": 2,
+  "meterValueSampleInterval": 10,
+  "heartbeatInterval": 30,
+  "batteryCapacityKwh": 80,
+  "firmwareVersion": "V2.3.14-BYD",
+  "meterType": "BYD-DC-Meter",
+  "serialPattern": "BYD-DC-XXXXXX",
+  "ccPowerMin": 100000,
+  "ccPowerMax": 120000,
+  "tricklePower": 7000,
+  "cvSocStart": 80,
+  "trickleSocStart": 95
+}

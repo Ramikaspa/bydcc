@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BYD 120kW Charger Screen</title>
+    <link rel="stylesheet" href="/charger.css" />
+  </head>
+  <body>
+    <div class="kiosk">
+      <div class="bezel">
+        <div class="lcd" id="lcd">
+          <header class="bar">
+            <div class="brand"><span class="logo">BYD</span> EV CHARGER 120kW</div>
+            <div class="meta">
+              <span><i id="ocppDot" class="dot off"></i> OCPP</span>
+              <span id="clock">--:--</span>
+              <span id="cpId">BYD-001</span>
+              <a class="icon-btn" id="fleetLink" href="/fleet">Fleet</a>
+              <a class="icon-btn" id="settingsLink" href="/settings">⚙ Settings</a>
+            </div>
+          </header>
+          <main class="stage">
+            <section class="hero">
+              <p class="prompt" id="prompt">Ready for service</p>
+              <h1 class="headline" id="headline">Plug in the charging cable</h1>
+              <span class="status-pill" id="pill">Available</span>
+              <div class="soc-wrap">
+                <div class="ring" id="ring" style="--soc: 0%">
+                  <span id="socLabel">--%<small>SoC</small></span>
+                </div>
+                <div class="kv">
+                  <div><span>Power</span><b id="mPower">0.0 kW</b></div>
+                  <div><span>Current</span><b id="mCurrent">0 A</b></div>
+                  <div><span>Voltage</span><b id="mVoltage">0 V</b></div>
+                  <div><span>Energy</span><b id="mEnergy">0.00 kWh</b></div>
+                </div>
+              </div>
+              <div class="actions">
+                <button class="btn rfid" id="btnRfid" type="button">Tap RFID card</button>
+                <button class="btn primary" id="btnStart" type="button">Start charging</button>
+                <button class="btn stop" id="btnStop" type="button" disabled>Stop charging</button>
+              </div>
+              <p class="msg" id="error"></p>
+            </section>
+            <aside class="side">
+              <p class="prompt">Connectors</p>
+              <div class="guns">
+                <button class="gun active" id="gun1" type="button" data-id="1">
+                  <strong>Gun A · CCS</strong>
+                  <em id="gun1s">Available — tap to plug in</em>
+                </button>
+                <button class="gun" id="gun2" type="button" data-id="2">
+                  <strong>Gun B · CCS</strong>
+                  <em id="gun2s">Available — tap to plug in</em>
+                </button>
+              </div>
+              <p class="prompt" style="margin-top:16px">Mode</p>
+              <p id="modeLabel">RFID</p>
+              <p class="prompt">Identity</p>
+              <p id="identity">BYD EV Charger 120kW</p>
+            </aside>
+          </main>
+          <footer class="foot">
+            <span id="fw">Firmware —</span>
+            <span>OCPP 1.6J JSON</span>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <script src="/hmi.js"></script>
+    <script src="/screen.js"></script>
+  </body>
+</html>

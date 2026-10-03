@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BYD Charger Settings</title>
+    <link rel="stylesheet" href="/charger.css" />
+  </head>
+  <body class="settings-page">
+    <div class="kiosk">
+      <div class="bezel">
+        <div class="lcd">
+          <header class="bar">
+            <div class="brand"><span class="logo">BYD</span> Charger settings</div>
+            <div class="meta">
+              <span><i id="ocppDot" class="dot off"></i> OCPP</span>
+              <a class="icon-btn" id="screenLink" href="/">← Charger screen</a>
+              <a class="icon-btn" href="/fleet">Fleet</a>
+            </div>
+          </header>
+          <form class="form" id="form">
+            <fieldset>
+              <legend>OCPP connection</legend>
+              <label>Charge point ID
+                <input name="chargePointId" id="chargePointId" />
+              </label>
+              <label>Central system URL (empty = local)
+                <input name="ocppUrl" id="ocppUrl" placeholder="ws://csms.example/ocpp" />
+              </label>
+              <label>Protocol
+                <select name="protocol" id="protocol">
+                  <option value="1.6J">OCPP 1.6J</option>
+                  <option value="2.0.1">OCPP 2.0.1</option>
+                </select>
+              </label>
+              <label>Heartbeat (s)
+                <input name="heartbeatInterval" id="heartbeatInterval" type="number" min="5" max="300" />
+              </label>
+              <label>Meter interval (s)
+                <input name="meterValueSampleInterval" id="meterValueSampleInterval" type="number" min="1" max="60" />
+              </label>
+            </fieldset>
+            <fieldset>
+              <legend>Charging and display</legend>
+              <label>Start mode
+                <select name="startMode" id="startMode">
+                  <option value="rfid">RFID</option>
+                  <option value="pnc">Plug &amp; Charge</option>
+                  <option value="app">App / RemoteStart</option>
+                </select>
+              </label>
+              <label>RFID tag
+                <input name="idTag" id="idTag" />
+              </label>
+              <label>Start SoC %
+                <input name="socStart" id="socStart" type="number" min="5" max="95" />
+              </label>
+              <label>Max power W
+                <input name="maxPower" id="maxPower" type="number" step="1000" />
+              </label>
+              <label>Max current A
+                <input name="maxCurrent" id="maxCurrent" type="number" />
+              </label>
+              <label>Screen brightness %
+                <input name="brightness" id="brightness" type="number" min="40" max="100" />
+              </label>
+            </fieldset>
+            <p class="help" id="identityHelp">Identity appears after boot.</p>
+            <p class="help" id="saveMsg"></p>
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Save</button>
+              <button class="btn ghost" id="btnReboot" type="button">Save and reboot OCPP</button>
+            </div>
+            <fieldset>
+              <legend>Central system commands (OCPP 1.6)</legend>
+              <p class="help">RemoteStart / RemoteStop / GetConfiguration / Reset — real calls over WebSocket.</p>
+              <div class="form-actions">
+                <button class="btn ghost" id="btnCfg" type="button">GetConfiguration</button>
+                <button class="btn primary" id="btnRemoteStart" type="button">RemoteStart</button>
+                <button class="btn stop" id="btnRemoteStop" type="button">RemoteStop</button>
+                <button class="btn ghost" id="btnReset" type="button">Reset Soft</button>
+              </div>
+              <pre class="log" id="csmsOut" style="margin-top:10px">—</pre>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/hmi.js"></script>
+    <script src="/settings.js"></script>
+  </body>
+</html>

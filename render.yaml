@@ -1,0 +1,18 @@
+# Node 22 is required for the built-in SQLite driver (node:sqlite).
+services:
+  - type: web
+    name: byd-ocpp-simulator
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm run dashboard
+    healthCheckPath: /
+    disk:
+      name: byd-sqlite
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: OCPP_DB
+        value: /var/data/byd-ocpp.sqlite
