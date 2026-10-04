@@ -5,7 +5,7 @@ import {
   validateCallFromCp,
   validateCallFromCsms,
   validateCallResultToCp,
-} from "../ocpp16/schema.js";
+} from "./schema.js";
 
 test("BootNotification model fits CiString20", () => {
   const model = "BYD EV Charger 120kW";

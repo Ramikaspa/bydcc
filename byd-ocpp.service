@@ -10,7 +10,7 @@ Environment=NODE_ENV=production
 Environment=CSMS_HOST=127.0.0.1
 Environment=CSMS_PORT=18473
 Environment=OCPP_DB=/var/lib/byd-ocpp/byd-ocpp.sqlite
-ExecStart=/usr/bin/node ocpp-simulator/demo_csms.js
+ExecStart=/usr/bin/node demo_csms.js
 Restart=on-failure
 RestartSec=3
 

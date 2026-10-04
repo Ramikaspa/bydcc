@@ -58,12 +58,12 @@ sudo mkdir -p /opt/byd-ocpp /var/lib/byd-ocpp
 sudo chown ubuntu:ubuntu /opt/byd-ocpp /var/lib/byd-ocpp
 ```
 
-3. Copy this project into `/opt/byd-ocpp` (`git clone` once the GitHub repo is linked, or `scp -r`). Then:
+3. Copy the repository contents into `/opt/byd-ocpp` (`git clone` or `scp -r`). From the repository root on the instance:
 
 ```bash
-cd /opt/byd-ocpp && npm install --omit=dev
-sudo cp deploy/byd-ocpp.service /etc/systemd/system/
-sudo cp deploy/nginx.conf /etc/nginx/sites-available/byd-ocpp
+cd /opt/byd-ocpp && npm ci --omit=dev
+sudo cp byd-ocpp.service /etc/systemd/system/
+sudo cp nginx.conf /etc/nginx/sites-available/byd-ocpp
 sudo ln -sf /etc/nginx/sites-available/byd-ocpp /etc/nginx/sites-enabled/byd-ocpp
 sudo rm -f /etc/nginx/sites-enabled/default
 sudo systemctl daemon-reload

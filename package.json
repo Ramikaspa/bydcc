@@ -8,10 +8,10 @@
     "node": ">=22"
   },
   "scripts": {
-    "simulator": "node ocpp-simulator/cli.js",
-    "demo-csms": "node ocpp-simulator/demo_csms.js",
-    "dashboard": "node ocpp-simulator/demo_csms.js",
-    "test": "node --test ocpp-simulator/test/*.test.js"
+    "simulator": "node cli.js",
+    "demo-csms": "node demo_csms.js",
+    "dashboard": "node demo_csms.js",
+    "test": "node --test *.test.js"
   },
   "dependencies": {
     "ws": "^8.18.3"

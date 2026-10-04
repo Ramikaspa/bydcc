@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { BydOcppSimulator } from "../byd_charger_simulator.js";
-import { startDemoCsms } from "../demo_csms.js";
+import { BydOcppSimulator } from "./byd_charger_simulator.js";
+import { startDemoCsms } from "./demo_csms.js";
 
 const profile = {
   vendor: "BYD",

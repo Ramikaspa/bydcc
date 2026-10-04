@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { openStore, chargerToSettings } from "../store.js";
-import { startDemoCsms } from "../demo_csms.js";
+import { openStore, chargerToSettings } from "./store.js";
+import { startDemoCsms } from "./demo_csms.js";
 
 test("SQLite store persists chargers and variables", () => {
   const store = openStore(":memory:");
@@ -25,6 +25,20 @@ test("SQLite store persists chargers and variables", () => {
     assert.equal(store.listChargers().length, 1);
   } finally {
     store.close();
+  }
+});
+
+test("dashboard serves UI assets without exposing application files", async () => {
+  const csms = await startDemoCsms({ port: 0, dbPath: ":memory:" });
+  const base = `http://127.0.0.1:${csms.httpServer.address().port}`;
+  try {
+    for (const path of ["/", "/fleet", "/settings", "/charger.css", "/hmi.js"]) {
+      assert.equal((await fetch(`${base}${path}`)).status, 200, path);
+    }
+    assert.equal((await fetch(`${base}/package.json`)).status, 404);
+    assert.equal((await fetch(`${base}/store.js`)).status, 404);
+  } finally {
+    await csms.close();
   }
 });
 

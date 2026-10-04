@@ -7,7 +7,7 @@ import {
   validateCallFromCsms,
   validateCallResultToCp,
   validateCallResultFromCp,
-} from "./ocpp16/schema.js";
+} from "./schema.js";
 
 export const CALL = 2;
 export const CALLRESULT = 3;

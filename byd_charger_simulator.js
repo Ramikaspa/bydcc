@@ -6,7 +6,7 @@ import { OcppJsonClient } from "./ocpp_json_client.js";
 import { nextSample } from "./byd_physics.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_PROFILE_PATH = join(__dirname, "profiles", "byd_120kw_profile.json");
+const DEFAULT_PROFILE_PATH = join(__dirname, "byd_120kw_profile.json");
 
 const SAMPLED_MEASURANDS_16 = [
   "Energy.Active.Import.Register",

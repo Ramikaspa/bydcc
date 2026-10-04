@@ -24,11 +24,11 @@ import {
   validateCallFromCp,
   validateCallFromCsms,
   validateCallResultToCp,
-} from "./ocpp16/schema.js";
+} from "./schema.js";
 import { openStore, chargerToSettings } from "./store.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const PUBLIC_DIR = join(__dirname, "public");
+const PUBLIC_DIR = __dirname;
 const HOST = process.env.CSMS_HOST ?? "0.0.0.0";
 const PORT = Number(process.env.PORT ?? process.env.CSMS_PORT ?? 18473);
 
@@ -40,6 +40,17 @@ const MIME = {
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon",
 };
+
+const PUBLIC_FILES = new Set([
+  "index.html",
+  "settings.html",
+  "fleet.html",
+  "charger.css",
+  "hmi.js",
+  "screen.js",
+  "settings.js",
+  "fleet.js",
+]);
 
 let nextTx = 1000;
 const sseClients = new Set();
@@ -253,6 +264,11 @@ async function serveStatic(req, res) {
   if (path.includes("..")) {
     res.writeHead(400);
     res.end("bad path");
+    return;
+  }
+  if (!PUBLIC_FILES.has(path.slice(1))) {
+    res.writeHead(404, { "content-type": "text/plain; charset=utf-8" });
+    res.end("Not found");
     return;
   }
   try {

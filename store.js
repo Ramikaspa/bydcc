@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_FILE = join(__dirname, "..", "data", "byd-ocpp.sqlite");
+const DEFAULT_FILE = join(__dirname, "data", "byd-ocpp.sqlite");
 
 function now() {
   return new Date().toISOString();
