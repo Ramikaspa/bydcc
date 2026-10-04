@@ -1,18 +1,15 @@
-# Node 22 is required for the built-in SQLite driver (node:sqlite).
 services:
   - type: web
     name: byd-ocpp-simulator
     runtime: node
     plan: starter
-    buildCommand: npm install
-    startCommand: npm run dashboard
+    buildCommand: git clone --depth 1 --recurse-submodules https://github.com/matth-x/MicroOcppSimulator.git MicroOcppSimulator && cmake -S MicroOcppSimulator -B MicroOcppSimulator/build && cmake --build MicroOcppSimulator/build --target mo_simulator --parallel 2
+    startCommand: sh render-start.sh
     healthCheckPath: /
     disk:
       name: byd-sqlite
       mountPath: /var/data
       sizeGB: 1
     envVars:
-      - key: NODE_VERSION
-        value: "22"
-      - key: OCPP_DB
-        value: /var/data/byd-ocpp.sqlite
+      - key: PORT
+        value: "8000"
