@@ -30,18 +30,13 @@ npm test
 
 Identity: vendor `BYD`, model `BYD EV Charger 120kW` (CiString20), serial `BYD-DC-XXXXXX`. Heartbeat 30 s, MeterValues 10 s. Frequency is reported **without** a `Hertz` unit (not in 1.6 `UnitOfMeasure`).
 
-## Deploy on Render
+## Replace the Render app with MicroOcppSimulator
 
-Yes — this app can run as a Render **Web Service**. It is one Node process (HMI + SQLite + OCPP WebSocket). Render injects `PORT`; the dashboard already binds that.
+The Render configuration in `render.yaml` replaces this Node.js BYDCC dashboard with the upstream C++ [MicroOcppSimulator](https://github.com/matth-x/MicroOcppSimulator), using the existing Web Service and persistent disk. It does not create another service. The current BYDCC dashboard and its OCPP server will no longer run at that Render URL. The repository's Dockerfile clones the simulator and its submodules directly, avoiding the upstream Dockerfile's failed `git submodule` command. On first startup, `render-start.sh` deletes the old `/var/data/byd-ocpp.sqlite` database and its SQLite WAL/SHM files. Simulator state is stored separately in `/var/data/microocpp`.
 
-**Do not use the free instance** for this. Sleep/spin-down drops OCPP sockets, and the free filesystem is wiped on every deploy so the SQLite fleet would vanish. Use a **paid** web service and attach a **persistent disk** (see `render.yaml`).
+Point the **existing** Render Web Service to this BYDCC repository and deploy the branch containing these changes; do not deploy the upstream simulator repository directly. Keep the existing persistent disk mounted at `/var/data`; do not create a new Web Service. The dashboard is served at the service root on port 8000.
 
-1. Push this repo to GitHub/GitLab and connect it in [Render](https://render.com).
-2. New **Web Service** → this repo. Build `npm install`, start `npm run dashboard`, Node **22**.
-3. Attach a 1 GB disk at `/var/data` and set `OCPP_DB=/var/data/byd-ocpp.sqlite`.
-4. After deploy, open `https://<your-service>.onrender.com/`, `/fleet`, and `/settings`. OCPP is `wss://<your-service>.onrender.com/ocpp/<ChargePointId>`.
-
-Blueprint: commit `render.yaml` and choose **Apply** from the Render dashboard. WebSockets work on Render without extra nginx config.
+Configure the simulator in its dashboard to connect to the OCPP Central System you want to test. Replacing BYDCC means the old BYDCC server is no longer available at this URL. The simulator's default API credentials are empty, so protect the service from public access unless you configure authentication.
 
 ## Deploy on AWS (EC2)
 
