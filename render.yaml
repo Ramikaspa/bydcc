@@ -1,10 +1,10 @@
 services:
   - type: web
     name: byd-ocpp-simulator
-    runtime: node
+    runtime: docker
     plan: starter
-    buildCommand: git clone --depth 1 --recurse-submodules https://github.com/matth-x/MicroOcppSimulator.git MicroOcppSimulator && cmake -S MicroOcppSimulator -B MicroOcppSimulator/build && cmake --build MicroOcppSimulator/build --target mo_simulator --parallel 2
-    startCommand: sh render-start.sh
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /
     disk:
       name: byd-sqlite

@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-simulator_dir="$PWD/MicroOcppSimulator"
+simulator_dir="/MicroOcppSimulator"
 store_dir="$simulator_dir/mo_store"
 persistent_store="/var/data/microocpp"
 
